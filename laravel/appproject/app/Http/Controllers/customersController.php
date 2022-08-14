@@ -39,6 +39,16 @@ class customersController extends Controller
      */
     public function store(Request $request)
     {
+		
+		$validated = $request->validate([
+        'name' => 'required',
+        'username' => 'required|email',
+		'password' => 'required|min:3|max:12',
+		'cid' => 'required',
+		'mobile' => 'required',
+		'file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+		]);
+		
         $data=new Customer;
 		$data->name=$request->name;
 		$data->username=$request->username;
@@ -47,6 +57,14 @@ class customersController extends Controller
 		$data->lag=implode(",",$request->lag);
 		$data->cid=$request->cid;
 		$data->mobile=$request->mobile;
+		
+		if($request->hasFile('file'))
+		{
+			$file=$request->file('file');
+			$filename=time().'_img.'.$request->file('file')->getClientOriginalExtension();
+			$file->move('upload/customer/',$filename);  // use move for move image in public/images
+			$data->file=$filename; // name store in db
+		}
 		$res=$data->save();
 		if($res)
 		{
@@ -136,13 +154,31 @@ class customersController extends Controller
      */
     public function update(Request $request, $id)
     {
+		$validated = $request->validate([
+        'name' => 'required',
+        'username' => 'required|email',
+		'cid' => 'required',
+		'file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+		]);
+		
+		
         $data=Customer::find($id);
+		$old_file=$data->file;
+		
 		$data->name=$request->name;
 		$data->username=$request->username;
 		$data->gen=$request->gen;
 		$data->lag=implode(",",$request->lag);
 		$data->cid=$request->cid;
 		$data->mobile=$request->mobile;
+		if($request->hasFile('file'))
+		{
+			$file=$request->file('file');
+			$filename=time().'_img.'.$request->file('file')->getClientOriginalExtension();
+			$file->move('upload/customer/',$filename);  // use move for move image in public/images
+			$data->file=$filename; // name store in db
+			unlink('upload/customer/'.$old_file);
+		}
 		$res=$data->update();
 		if($res)
 		{

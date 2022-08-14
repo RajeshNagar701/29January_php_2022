@@ -9,7 +9,7 @@
 			<div class="col-lg-3"></div>
 			<div class="col-lg-3 col-6 team-grids">
 				<div class="team-effect">
-					<img src="upload/customer/" alt="img" height="150px" width="150px">
+					<img src="{{asset('upload/customer/'.$fetch->file)}}" alt="img" height="150px" width="150px">
 				</div>
 			</div>
 			

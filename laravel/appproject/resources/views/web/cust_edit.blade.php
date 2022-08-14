@@ -111,9 +111,10 @@
 					
 					<div class="form-group">
 						<label for="password1" class="col-form-label">Upload Pic</label>
-						<input type="file" class="form-control" name="img" value="<?php echo $fetch->img;?>">
+						<input type="file" class="form-control" name="file" value="<?php echo $fetch->file;?>">
+						<img src="{{asset('upload/customer/'.$fetch->file)}}" alt="img" height="150px" width="150px">
 					</div>
-					<img src="upload/customer/<?php echo $fetch->img;?>" width="50px" height="100px"/>
+					
 					<div class="right-w3l">
 						<input type="submit" name="save" class="form-control" value="Save">
 					</div>

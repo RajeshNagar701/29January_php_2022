@@ -24,15 +24,24 @@
 				@csrf
 					<div class="form-group">
 						<label for="recipient-name" class="col-form-label">Name</label>
-						<input type="text" class="form-control" placeholder="Name" name="name" id="recipient-rname" required="">
+						<input type="text" class="form-control" placeholder="Name" name="name" id="recipient-rname" >
+						@error('name')
+								<div class="alert alert-danger">{{ $message }}</div>
+						@enderror
 					</div>
 					<div class="form-group">
 						<label for="recipient-email" class="col-form-label">Email</label>
-						<input type="text" class="form-control" placeholder="User Name" name="username" id="recipient-email" required="">
+						<input type="text" class="form-control" placeholder="User Name" name="username" id="recipient-email">
+						@error('username')
+								<div class="alert alert-danger">{{ $message }}</div>
+						@enderror
 					</div>
 					<div class="form-group">
 						<label for="password1" class="col-form-label">Password</label>
-						<input type="password" class="form-control" placeholder="Password" name="password" id="password1" required="">
+						<input type="password" class="form-control" placeholder="Password" name="password" id="password1">
+						@error('password')
+								<div class="alert alert-danger">{{ $message }}</div>
+						@enderror
 					</div>
 					
 					<div class="form-group">
@@ -48,7 +57,7 @@
 					</div>
 					<div class="form-group">
 						<label for="password1" class="col-form-label">Select Country</label>
-						<select class="form-control" name="cid" required="">
+						<select class="form-control" name="cid">
 							<option value="">------  Select Country ------</option>
 							<?php
 							foreach($country_arr as $d)
@@ -59,10 +68,23 @@
 							}
 							?>
 						</select>
+						@error('cid')
+								<div class="alert alert-danger">{{ $message }}</div>
+						@enderror
 					</div>
 					<div class="form-group">
 						<label for="recipient-email" class="col-form-label">Mobile</label>
-						<input type="number" class="form-control" placeholder="User Mobile" name="mobile" id="recipient-email" required="">
+						<input type="number" class="form-control" placeholder="User Mobile" name="mobile" id="recipient-email" >
+						@error('mobile')
+								<div class="alert alert-danger">{{ $message }}</div>
+						@enderror
+					</div>
+					<div class="form-group">
+						<label for="recipient-email" class="col-form-label">File Uploading</label>
+						<input type="file" class="form-control" placeholder="file" name="file" id="recipient-email">
+						@error('file')
+								<div class="alert alert-danger">{{ $message }}</div>
+						@enderror
 					</div>
 					<div class="right-w3l">
 						<input type="submit" name="submit" class="form-control" value="Register">
